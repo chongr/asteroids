@@ -17,7 +17,7 @@ Game.prototype.randomPosition = function() {
 
 Game.prototype.addAsteroids = function() {
   for (var i = 0; i < NUM_ASTEROIDS; i++) {
-    var newAsteroid = new Asteroid( { pos: this.randomPosition() } );
+    var newAsteroid = new Asteroid( { pos: this.randomPosition(), game: this } );
     this.asteroids.push(newAsteroid);
   }
 };
@@ -34,6 +34,12 @@ Game.prototype.moveObjects = function () {
   for (var i = 0; i < this.asteroids.length; i++) {
     this.asteroids[i].move();
   }
+};
+
+Game.prototype.wrap = function (pos) {
+  var x = Math.abs((pos[0]) % DIM_X);
+  var y = Math.abs((pos[1]) % DIM_Y);
+  return [x,y];
 };
 
 module.exports = Game;

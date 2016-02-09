@@ -1,11 +1,9 @@
-var DIM_X = 750;
-var DIM_Y = 870;
-
 function MovingObject (options) {
   this.pos = options['pos'];
   this.vel = options['vel'];
   this.radius = options['radius'];
   this.color = options['color'];
+  this.game = options['game'];
 }
 
 MovingObject.prototype.draw = function (ctx) {
@@ -25,8 +23,9 @@ MovingObject.prototype.draw = function (ctx) {
 };
 
 MovingObject.prototype.move = function () {
-  this.pos[0] = Math.abs((this.pos[0] + this.vel[0]) % DIM_X);
-  this.pos[1] = Math.abs((this.pos[1] + this.vel[1]) % DIM_Y);
+  this.pos[0] += this.vel[0];
+  this.pos[1] += this.vel[1];
+  this.pos = this.game.wrap(this.pos);
 };
 
 module.exports = MovingObject;
