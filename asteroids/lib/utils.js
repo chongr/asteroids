@@ -10,13 +10,22 @@ Util.prototype.inherits = function(childClass, parentClass) {
 };
 
 Util.prototype.randomVec = function (length) {
-  var x = Math.random() * 50;
+  var x = Math.random() * 100;
   var y = calcY(length, x);
+
+  if (Math.random() < 0.5) {
+    x *= -1;
+  }
+
+  if (Math.random() < 0.5) {
+    y *= -1;
+  }
+
   return [x,y];
 };
 
 function calcY (length, x) {
-  return Math.sqrt((length * length) - (x * x));
+  return Math.sqrt(Math.abs((length * length) - (x * x)));
 }
 function distance (pos1, pos2) {
   var dx = pos1[0] - pos2[0];
